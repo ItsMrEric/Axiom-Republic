@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Hub - Main Entrance</title>
+    <link rel="icon" href="data:image/svg+xml;base64," type="image/svg+xml">
+    <style>
+        /* Base styles matching the chat interface */
+        body {
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+            display: flex;
+            height: 100vh;
+            margin: 0;
+            background: #f8f9fa;
+        }
+        
+        .sidebar {
+            width: 320px;
+            border-right: 1px solid #eee;
+            padding: 16px;
+            box-sizing: border-box;
+            overflow: auto;
+            background: #fff;
+            transition: all 0.3s ease;
+        }
+        
+        .main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            background: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .content {
+            flex: 1;
+            padding: 20px;
+            overflow: auto;
+            background: #f8f9fa;
+        }
+        
+        button {
+            padding: 8px 12px;
+            cursor: pointer;
+            border: none;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-primary {
+            background: #4a90e2;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #3a7bc8;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .btn-secondary {
+            background: #f5f5f5;
+            color: #333;
+        }
+        
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+        
+        /* Project-specific styles */
+        .project-section {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .project-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            margin-bottom: 16px;
+            border: 1px solid #eee;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+        
+        .project-item:hover {
+            background: #f0f5ff;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .project-info {
+            flex: 1;
+        }
+        
+        .project-name {
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .project-description {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.4;
+        }
+        
+        .project-details {
+            font-size: 0.85rem;
+            color: #888;
+            margin-top: 8px;
+        }
+        
+        .category-title {
+            font-size: 1.2rem;
+            margin-bottom: 16px;
+            color: #333;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
+        }
+        
+        .sidebar-item {
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .sidebar-item:hover {
+            background: #f0f5ff;
+        }
+        
+        .sidebar-item.active {
+            background: #e6f0ff;
+            border-left: 3px solid #4a90e2;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
+            .sidebar { 
+                width: 100%; 
+                height: auto; 
+                border-right: none; 
+                border-bottom: 1px solid #eee; 
+            }
+        }
+        
+        .welcome-section {
+            text-align: center;
+            padding: 40px 20px;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .welcome-section h1 {
+            margin-bottom: 16px;
+            color: #333;
+        }
+        
+        .welcome-section p {
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto 24px;
+            line-height: 1.6;
+        }
+        
+        .project-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            background: #4a90e2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .project-header {
+            display: flex;
+            align-items: center;
+        }
+        
+        .project-content {
+            margin-top: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Project Navigation</h2>
+        <div class="sidebar-list">
+            <div class="sidebar-item active" data-target="welcome">
+                <div class="file-info">
+                    <div class="file-name">Welcome</div>
+                    <div class="file-details">Project Hub Introduction</div>
+                </div>
+            </div>
+            <div class="sidebar-item" data-target="project1">
+                <div class="file-info">
+                    <div class="file-name">Axiom Files</div>
+                    <div class="file-details">File Repository & Downloads</div>
+                </div>
+            </div>
+            <div class="sidebar-item" data-target="project2">
+                <div class="file-info">
+                    <div class="file-name">Axiom Chat</div>
+                    <div class="file-details">Communication Platform</div>
+                </div>
+            </div>
+            <div class="sidebar-item" data-target="project3">
+                <div class="file-info">
+                    <div class="file-name">Axiom Republic</div>
+                    <div class="file-details">Community Portal</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="main">
+        <div class="header">
+            <h2>Project Hub - Main Entrance</h2>
+        </div>
+        
+        <div class="content">
+            <!-- Welcome Section -->
+            <div id="welcome" class="project-section active-section">
+                <div class="welcome-section">
+                    <h1>Welcome to the Project Hub</h1>
+                    <p>This is the main entrance to access all three websites in the Axiom ecosystem. Each project serves a different purpose and offers unique functionality.</p>
+                    <button class="btn-primary" onclick="showSection('project1')">Explore Projects</button>
+                </div>
+            </div>
+            
+            <!-- Project 1 Section -->
+            <div id="project1" class="project-section">
+                <div class="project-header">
+                    <div class="project-icon">AF</div>
+                    <div>
+                        <h2 class="category-title">Axiom Files</h2>
+                        <p class="project-details">File Repository & Downloads</p>
+                    </div>
+                </div>
+                
+                <div class="project-content">
+                    <div class="project-item">
+                        <div class="project-info">
+                            <div class="project-name">File Repository System</div>
+                            <div class="project-description">
+                                A comprehensive file management system that allows users to browse, organize, and download various types of files including software, documents, media, and archives.
+                            </div>
+                            <div class="project-details">Version 2.1 • Updated 2 days ago</div>
+                        </div>
+                        <button class="btn-primary" onclick="openProject('axiom-files.html')">
+                            Open Project
+                        </button>
+                    </div>
+                    
+                    <div class="project-item">
+                        <div class="project-info">
+                            <div class="project-name">Key Features</div>
+                            <div class="project-description">
+                                • Categorized file downloads<br>
+                                • Software and application repository<br>
+                                • Document and tutorial library<br>
+                                • Media file management<br>
+                                • Archive storage for legacy files
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 2 Section -->
+            <div id="project2" class="project-section">
+                <div class="project-header">
+                    <div class="project-icon">AC</div>
+                    <div>
+                        <h2 class="category-title">Axiom Chat</h2>
+                        <p class="project-details">Communication Platform</p>
+                    </div>
+                </div>
+                
+                <div class="project-content">
+                    <div class="project-item">
+                        <div class="project-info">
+                            <div class="project-name">Real-time Communication</div>
+                            <div class="project-description">
+                                A modern chat application designed for seamless communication with features for both individual and group conversations.
+                            </div>
+                            <div class="project-details">Version Pre1.5 • Updated 1 week ago</div>
+                        </div>
+                        <button class="btn-primary" onclick="openProject('axiom-chat.html')">
+                            Open Project
+                        </button>
+                    </div>
+                    
+                    <div class="project-item">
+                        <div class="project-info">
+                            <div class="project-name">Key Features</div>
+                            <div class="project-description">
+                                • Real-time messaging<br>
+                                • User presence indicators<br>
+                                • File sharing capabilities<br>
+                                • Conversation history<br>
+                                • Responsive design for all devices
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 3 Section -->
+            <div id="project3" class="project-section">
+                <div class="project-header">
+                    <div class="project-icon">AR</div>
+                    <div>
+                        <h2 class="category-title">Axiom Republic</h2>
+                        <p class="project-details">Community Portal</p>
+                    </div>
+                </div>
+                
+                <div class="project-content">
+                    <div class="project-item">
+                        <div class="project-info">
+                            <div class="project-name">Community Hub</div>
+                            <div class="project-description">
+                                A central portal for the Axiom community with news, announcements, member profiles, and collaborative spaces.
+                            </div>
+                            <div class="project-details">Version 1.0 • Updated 3 days ago</div>
+                        </div>
+                        <button class="btn-primary" onclick="openProject('axiom-republic.html')">
+                            Open Project
+                        </button>
+                    </div>
+                    
+                    <div class="project-item">
+                        <div class="project-info">
+                            <div class="project-name">Key Features</div>
+                            <div class="project-description">
+                                • Community announcements<br>
+                                • Member directory<br>
+                                • Discussion forums<br>
+                                • Event calendar<br>
+                                • Resource sharing
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navigation functionality
+        document.querySelectorAll('.sidebar-item').forEach(item => {
+            item.addEventListener('click', function() {
+                // Remove active class from all items
+                document.querySelectorAll('.sidebar-item').forEach(i => {
+                    i.classList.remove('active');
+                });
+                
+                // Add active class to clicked item
+                this.classList.add('active');
+                
+                // Show corresponding section
+                const target = this.getAttribute('data-target');
+                showSection(target);
+            });
+        });
+        
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.project-section').forEach(section => {
+                section.classList.remove('active-section');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active-section');
+        }
+        
+        function openProject(filename) {
+            alert(`Opening ${filename} - In a real implementation, this would navigate to the actual file.`);
+            // In a real implementation, you would use:
+            // window.location.href = filename;
+        }
+        
+        // Initialize with welcome section
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('welcome');
+        });
+    </script>
+</body>
+</html>
