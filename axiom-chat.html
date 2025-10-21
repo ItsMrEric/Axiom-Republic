@@ -190,6 +190,20 @@ h4{margin-top:12px;margin-bottom:4px;}
   margin-left: 8px;
 }
 
+/* FIX: Consistent form spacing */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.auth-form .button-group {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   body { flex-direction: column; }
@@ -202,18 +216,18 @@ h4{margin-top:12px;margin-bottom:4px;}
 <div class="sidebar">
   <div id="auth-area">
     <h3>Sign up / Sign in</h3>
-    <form id="signup-form">
+    <form id="signup-form" class="auth-form">
       <input id="signup-username" type="text" placeholder="Username" required>
       <input id="signup-password" type="password" placeholder="Password" required>
-      <div style="display:flex;gap:8px">
+      <div class="button-group">
         <button type="submit" class="btn-primary">Sign up</button>
         <button type="button" id="show-signin" class="btn-secondary">Sign in</button>
       </div>
     </form>
-    <form id="signin-form" style="display:none">
+    <form id="signin-form" class="auth-form" style="display:none">
       <input id="signin-username" type="text" placeholder="Username" required>
       <input id="signin-password" type="password" placeholder="Password" required>
-      <div style="display:flex;gap:8px">
+      <div class="button-group">
         <button type="submit" class="btn-primary">Sign in</button>
         <button type="button" id="show-signup" class="btn-secondary">Back</button>
       </div>
@@ -259,12 +273,12 @@ const signupForm = document.getElementById('signup-form');
 const signinForm = document.getElementById('signin-form');
 document.getElementById('show-signin').onclick=()=>{
   signupForm.style.display='none'; 
-  signinForm.style.display='block';
+  signinForm.style.display='flex';
   signinForm.style.animation = 'fadeIn 0.3s ease';
 }
 document.getElementById('show-signup').onclick=()=>{
   signinForm.style.display='none'; 
-  signupForm.style.display='block';
+  signupForm.style.display='flex';
   signupForm.style.animation = 'fadeIn 0.3s ease';
 }
 
