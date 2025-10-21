@@ -241,7 +241,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="main">
         <div class="header">
             <h2>Project Hub - Main Entrance</h2>
@@ -253,7 +253,6 @@
                 <div class="welcome-section">
                     <h1>Welcome to the Project Hub</h1>
                     <p>This is the main entrance to access all three websites in the Axiom ecosystem. Each project serves a different purpose and offers unique functionality.</p>
-                    <button class="btn-primary" onclick="showSection('project1')">Explore Projects</button>
                 </div>
             </div>
             
@@ -274,7 +273,7 @@
                             <div class="project-description">
                                 A comprehensive file management system that allows users to browse, organize, and download various types of files including software, documents, media, and archives.
                             </div>
-                            <div class="project-details">Version 2.1 • Updated 2 days ago</div>
+                            <div class="project-details">Version 0.1 • Updated 0 days ago</div>
                         </div>
                         <button class="btn-primary" onclick="openProject('axiom-files.html')">
                             Open Project
@@ -334,45 +333,6 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Project 3 Section -->
-            <div id="project3" class="project-section">
-                <div class="project-header">
-                    <div class="project-icon">AR</div>
-                    <div>
-                        <h2 class="category-title">Axiom Republic</h2>
-                        <p class="project-details">Community Portal</p>
-                    </div>
-                </div>
-                
-                <div class="project-content">
-                    <div class="project-item">
-                        <div class="project-info">
-                            <div class="project-name">Community Hub</div>
-                            <div class="project-description">
-                                A central portal for the Axiom community with news, announcements, member profiles, and collaborative spaces.
-                            </div>
-                            <div class="project-details">Version 1.0 • Updated 3 days ago</div>
-                        </div>
-                        <button class="btn-primary" onclick="openProject('axiom-republic.html')">
-                            Open Project
-                        </button>
-                    </div>
-                    
-                    <div class="project-item">
-                        <div class="project-info">
-                            <div class="project-name">Key Features</div>
-                            <div class="project-description">
-                                • Community announcements<br>
-                                • Member directory<br>
-                                • Discussion forums<br>
-                                • Event calendar<br>
-                                • Resource sharing
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -405,9 +365,9 @@
         }
         
         function openProject(filename) {
-            alert(`Opening ${filename} - In a real implementation, this would navigate to the actual file.`);
+            // alert(`Opening ${filename} - In a real implementation, this would navigate to the actual file.`);
             // In a real implementation, you would use:
-            // window.location.href = filename;
+            window.location.href = filename;
         }
         
         // Initialize with welcome section
