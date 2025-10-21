@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="data:image/svg+xml;base64," type="image/svg+xml">
+    <title>Axiom Files -- Axiom Republic</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Base styles matching the chat interface */
+        body {
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+            display: flex;
+            height: 100vh;
+            margin: 0;
+            background: #f8f9fa;
+        }
+        
+        .sidebar {
+            width: 320px;
+            border-right: 1px solid #eee;
+            padding: 16px;
+            box-sizing: border-box;
+            overflow: auto;
+            background: #fff;
+            transition: all 0.3s ease;
+        }
+        
+        .main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            background: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .content {
+            flex: 1;
+            padding: 20px;
+            overflow: auto;
+            background: #f8f9fa;
+        }
+        
+        button {
+            padding: 8px 12px;
+            cursor: pointer;
+            border: none;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-primary {
+            background: #4a90e2;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #3a7bc8;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .btn-secondary {
+            background: #f5f5f5;
+            color: #333;
+        }
+        
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+        
+        /* Download-specific styles */
+        .download-section {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .download-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            margin-bottom: 12px;
+            border: 1px solid #eee;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+        
+        .download-item:hover {
+            background: #f0f5ff;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .file-info {
+            flex: 1;
+        }
+        
+        .file-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .file-details {
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        .download-btn {
+            padding: 8px 16px;
+            font-weight: 500;
+        }
+        
+        .category-title {
+            font-size: 1.2rem;
+            margin-bottom: 16px;
+            color: #333;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
+            .sidebar { 
+                width: 100%; 
+                height: auto; 
+                border-right: none; 
+                border-bottom: 1px solid #eee; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Download Categories</h2>
+        <div class="category-list">
+            <div class="download-item">
+                <div class="file-info">
+                    <div class="file-name">Software & Apps</div>
+                    <div class="file-details">Applications and Games</div>
+                </div>
+            </div>
+            <div class="download-item">
+                <div class="file-info">
+                    <div class="file-name">Documents</div>
+                    <div class="file-details">Tutorials & Guides</div>
+                </div>
+            </div>
+            <div class="download-item">
+                <div class="file-info">
+                    <div class="file-name">Media</div>
+                    <div class="file-details">Images, videos, and audio</div>
+                </div>
+            </div>
+            <div class="download-item">
+                <div class="file-info">
+                    <div class="file-name">Archives</div>
+                    <div class="file-details">Stuff LONG ago or do not need anymore.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="main">
+        <div class="header">
+            <h2>File Downloads</h2>
+        </div>
+        
+        <div class="content">
+            <div class="download-section">
+                <h3 class="category-title">Software Downloads</h3>
+                
+                <div class="download-item">
+                    <div class="file-info">
+                        <div class="file-name">Axiom Chat(Pre PX Chat).html</div>
+                        <div class="file-details">Version Pre1.5 • ? MB • Browser • In Progress</div>
+                    </div>
+                    <button class="download-btn btn-primary" data-filename="Axiom Chat(Pre PX Chat).html" data-filetype="text/html">
+                        Download
+                    </button>
+                </div>
+                <div class="download-item">
+                    <div class="file-info">
+                        <div class="file-name">GAME -- Ravenfield -- </div>
+                        <div class="file-details">MP4 • 45.2 MB • 5 minute overview</div>
+                    </div>
+                    <button class="download-btn btn-primary" onclick="window.location.href='https://pan.baidu.com/s/18DXl5z7MCtRY5eAyp3jGww?pwd=9999'">
+                        Download
+                    </button>
+                </div>
+                <div class="download-item">
+                    <div class="file-info">
+                        <div class="file-name">Image Editor Pro</div>
+                        <div class="file-details">Version 2.1 • 28.7 MB • Windows, Mac</div>
+                    </div>
+                    <button class="download-btn btn-primary" data-filename="Image Editor Pro.zip" data-filetype="application/zip">
+                        Download
+                    </button>
+                </div>
+                
+                <div class="download-item">
+                    <div class="file-info">
+                        <div class="file-name">File Organizer Tool</div>
+                        <div class="file-details">Version 1.0 • 5.3 MB • Windows</div>
+                    </div>
+                    <button class="download-btn btn-primary" data-filename="File Organizer Tool.zip" data-filetype="application/zip">
+                        Download
+                    </button>
+                </div>
+            </div>
+            
+            <div class="download-section">
+                <h3 class="category-title">Documentation</h3>
+                
+                <div class="download-item">
+                    <div class="file-info">
+                        <div class="file-name">User Manual</div>
+                        <div class="file-details">PDF • 2.1 MB • Comprehensive guide</div>
+                    </div>
+                    <button class="download-btn btn-primary" data-filename="User Manual.pdf" data-filetype="application/pdf">
+                        Download
+                    </button>
+                </div>
+                
+                <div class="download-item">
+                    <div class="file-info">
+                        <div class="file-name">API Reference</div>
+                        <div class="file-details">PDF • 3.5 MB • Developer documentation</div>
+                    </div>
+                    <button class="download-btn btn-primary" data-filename="API Reference.pdf" data-filetype="application/pdf">
+                        Download
+                    </button>
+                </div>
+                
+                <div class="download-item">
+                    <div class="file-info">
+                        <div class="file-name">Installation Guide</div>
+                        <div class="file-details">PDF • 1.2 MB • Step-by-step instructions</div>
+                    </div>
+                    <button class="download-btn btn-primary" data-filename="Installation Guide.pdf" data-filetype="application/pdf">
+                        Download
+                    </button>
+                </div>
+            </div>
+            
+            <div class="download-section">
+                <h3 class="category-title">Media Files</h3>
+                
+                <div class="download-item">
+                    <div class="file-info">
+                        <div class="file-name">Product Demo Video</div>
+                        <div class="file-details">MP4 • 45.2 MB • 5 minute overview</div>
+                    </div>
+                    <button class="download-btn btn-primary" data-filename="Product Demo Video.mp4" data-filetype="video/mp4">
+                        Download
+                    </button>
+                </div>
+                
+                <div class="download-item">
+                    <div class="file-info">
+                        <div class="file-name">Brand Assets</div>
+                        <div class="file-details">ZIP • 12.8 MB • Logos and images</div>
+                    </div>
+                    <button class="download-btn btn-primary" data-filename="Brand Assets.zip" data-filetype="application/zip">
+                        Download
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Base64 file data storage
+        const fileData = {
+            // Add your Base64 data here later
+            // Example format:
+            "Axiom Chat(Pre PX Chat).html": "base64datahere",
+            // "Image Editor Pro.zip": "base64datahere",
+            // etc.
+        };
+
+        // Function to download files from Base64 data
+        function downloadFromBase64(filename, fileType, base64Data) {
+            // Create a temporary link element
+            const link = document.createElement('a');
+            link.style.display = 'none';
+            
+            // Convert Base64 to Blob
+            const byteCharacters = atob(base64Data);
+            const byteNumbers = new Array(byteCharacters.length);
+            for (let i = 0; i < byteCharacters.length; i++) {
+                byteNumbers[i] = byteCharacters.charCodeAt(i);
+            }
+            const byteArray = new Uint8Array(byteNumbers);
+            const blob = new Blob([byteArray], { type: fileType });
+            
+            // Create object URL and set as href
+            const url = URL.createObjectURL(blob);
+            link.href = url;
+            link.download = filename;
+            
+            // Append to body, click, and remove
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Clean up the URL object
+            setTimeout(() => URL.revokeObjectURL(url), 100);
+        }
+
+        // Add animation to download items when they come into view
+        document.addEventListener('DOMContentLoaded', function() {
+            const downloadItems = document.querySelectorAll('.download-item');
+            
+            downloadItems.forEach((item, index) => {
+                // Add slight delay for staggered animation
+                setTimeout(() => {
+                    item.style.animation = 'slideIn 0.5s ease forwards';
+                }, index * 100);
+            });
+            
+            // Add click effect to download buttons
+            const downloadButtons = document.querySelectorAll('.download-btn');
+            downloadButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    const filename = this.getAttribute('data-filename');
+                    const filetype = this.getAttribute('data-filetype');
+                    
+                    // Check if we have Base64 data for this file
+                    if (fileData[filename]) {
+                        // Add visual feedback
+                        const originalText = this.textContent;
+                        this.textContent = 'Downloading...';
+                        this.style.backgroundColor = '#2e6ab3';
+                        
+                        // Download the file
+                        downloadFromBase64(filename, filetype, fileData[filename]);
+                        
+                        // Reset after a short delay
+                        setTimeout(() => {
+                            this.textContent = originalText;
+                            this.style.backgroundColor = '';
+                        }, 1500);
+                    } else {
+                        // If no Base64 data is available, show an alert
+                        alert('File data not available yet. Please add the Base64 data to the fileData object.');
+                        
+                        // Add visual feedback for error
+                        const originalText = this.textContent;
+                        this.textContent = 'Data Missing';
+                        this.style.backgroundColor = '#e74c3c';
+                        
+                        // Reset after a short delay
+                        setTimeout(() => {
+                            this.textContent = originalText;
+                            this.style.backgroundColor = '';
+                        }, 1500);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
