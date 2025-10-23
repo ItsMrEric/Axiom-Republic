@@ -344,10 +344,7 @@
     <script>
         // Base64 file data storage
         const fileData = {
-            // Add your Base64 data here later
-            // Example format:
             "Minecraft.zip": "",
-            // etc.
         };
 
         // Function to download files from Base64 data
@@ -413,8 +410,6 @@
                             this.style.backgroundColor = '';
                         }, 1500);
                     } else {
-                        // If no Base64 data is available, show an alert
-                        alert('File data not available yet. Please add the Base64 data to the fileData object. Tring to open downloadlink if available.');
                         
                         // Add visual feedback for error
                         const originalText = this.textContent;
