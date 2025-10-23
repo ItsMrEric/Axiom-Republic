@@ -36,6 +36,9 @@
             border-bottom: 1px solid #eee;
             background: #fff;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
         .content {
@@ -70,6 +73,62 @@
         
         .btn-secondary:hover {
             background: #e0e0e0;
+        }
+        
+        /* Admin button styles */
+        .admin-btn {
+            background: #4a90e2;
+            color: white;
+            font-size: 0.9rem;
+            padding: 6px 12px;
+        }
+        
+        .admin-btn:hover {
+            background: #3a7bc8;
+        }
+        
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 24px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        
+        .modal-title {
+            margin-top: 0;
+            margin-bottom: 16px;
+            font-size: 1.2rem;
+        }
+        
+        .password-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
         }
         
         /* Download-specific styles */
@@ -125,6 +184,11 @@
             padding-bottom: 8px;
         }
         
+        /* Hidden admin downloads */
+        .admin-downloads {
+            display: none;
+        }
+        
         /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -149,6 +213,19 @@
     </style>
 </head>
 <body>
+    <!-- Admin Modal -->
+    <div id="adminModal" class="modal">
+        <div class="modal-content">
+            <h3 class="modal-title">Admin Access</h3>
+            <p>Please enter the admin password:</p>
+            <input type="password" id="adminPassword" class="password-input" placeholder="Enter password">
+            <div class="modal-buttons">
+                <button id="cancelAdmin" class="btn-secondary">Cancel</button>
+                <button id="submitAdmin" class="btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+
     <div class="sidebar">
         <h2>Download Categories</h2>
         <div class="category-list">
@@ -182,18 +259,20 @@
     <div class="main">
         <div class="header">
             <h2>File Downloads -> Send the games you want to Minecrowaver@outlook.com or gmail! </h2>
+            <button id="adminButton" class="admin-btn">I am admin</button>
         </div>
         
         <div class="content">
-            <div class="download-section">
-                <h3 class="category-title">Software Downloads</h3>
+            <!-- Admin Downloads Section (Hidden by default) -->
+            <div id="adminDownloads" class="download-section admin-downloads">
+                <h3 class="category-title">Admin Downloads</h3>
                 
                 <div class="download-item">
                     <div class="file-info">
                         <div class="file-name">Axiom Chat(Pre PX Chat).html</div>
                         <div class="file-details">Version Pre1.5 HTML • ? MB • Browser • In Progress, but updates</div>
                     </div>
-                    <button class="download-btn btn-primary" data-filename="Axiom Chat(Pre PX Chat).html" data-filetype="text/html">
+                    <button class="download-btn btn-primary" onclick="window.location.href='https://ipapi.co/country/' === 'CN' ? 'about:blank' : 'about:blank'">
                         Download
                     </button>
                 </div>
@@ -202,10 +281,14 @@
                         <div class="file-name">Axiom Republic Main.html</div>
                         <div class="file-details">Version Pre1.1 HTML • ? MB • Browser • In Progress, but updates</div>
                     </div>
-                    <button class="download-btn btn-primary" data-filename="Axiom Chat(Pre PX Chat).html" data-filetype="text/html">
+                    <button class="download-btn btn-primary" onclick="window.location.href='https://ipapi.co/country/' === 'CN' ? 'about:blank' : 'about:blank'">
                         Download
                     </button>
                 </div>
+            </div>
+            
+            <div class="download-section">
+                <h3 class="category-title">Software Downloads</h3>
                 <div class="download-item">
                     <div class="file-info">
                         <div class="file-name">GAME -- Hollow Knight.dmg</div>
@@ -346,6 +429,56 @@
         const fileData = {
             "Minecraft.zip": "",
         };
+
+        // Admin functionality
+        const adminButton = document.getElementById('adminButton');
+        const adminModal = document.getElementById('adminModal');
+        const cancelAdmin = document.getElementById('cancelAdmin');
+        const submitAdmin = document.getElementById('submitAdmin');
+        const adminPassword = document.getElementById('adminPassword');
+        const adminDownloads = document.getElementById('adminDownloads');
+        
+        // Show admin modal
+        adminButton.addEventListener('click', function() {
+            adminModal.style.display = 'flex';
+            adminPassword.focus();
+        });
+        
+        // Hide admin modal
+        cancelAdmin.addEventListener('click', function() {
+            adminModal.style.display = 'none';
+            adminPassword.value = '';
+        });
+        
+        // Submit admin password
+        submitAdmin.addEventListener('click', function() {
+            const password = adminPassword.value;
+            
+            // Check if password is correct (case-insensitive)
+            if (password.toLowerCase() === 'rickliesinbed') {
+                // Show admin downloads
+                adminDownloads.style.display = 'block';
+                
+                // Hide modal
+                adminModal.style.display = 'none';
+                adminPassword.value = '';
+                
+                // Provide feedback
+                alert('Admin access granted!');
+            } else {
+                // Show error
+                alert('Incorrect password. Please try again.');
+                adminPassword.value = '';
+                adminPassword.focus();
+            }
+        });
+        
+        // Allow Enter key to submit password
+        adminPassword.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                submitAdmin.click();
+            }
+        });
 
         // Function to download files from Base64 data
         function downloadFromBase64(filename, fileType, base64Data) {
